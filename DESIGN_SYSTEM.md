@@ -1,75 +1,55 @@
-# Web Design Lab — Design System v3.0
+# Architectural Precision — Design System v4
 
-An interactive, framework-independent design system playground for reviewing foundations, components and page patterns.
+Направление: архитектурная презентация (иерархия и воздух), Apex Arc (пространственная композиция), Dream Homes (жилая среда и фотография). Референсы интерпретированы как принципы, без копирования брендов. Главная страница — лаборатория, не сайт действующей студии.
 
-## Live site
-https://arhicoach.github.io/web-design-lab/
+## Токены и роли
 
-## Architecture
-- **Foundations:** typography scale, semantic colors, spacing scale.
-- **Atoms:** buttons, inputs, selects, textarea, checkbox.
-- **Molecules:** feature cards and accessible modal.
-- **Organisms:** navigation and hero.
-- **Templates:** sample pricing cards.
+| Роль | Значение | Правило |
+|---|---|---|
+| Фон / текст | #F5F3ED / #242923 | Светлая базовая поверхность |
+| Вторичный текст | #61695D | Для описаний; не уменьшать прозрачность |
+| Линия | #D4D7CB | Только разделение, не смысловые индикаторы |
+| Акцент | #425B42 | CTA; белый текст |
+| Акценты на выбор | #805135 / #354F70 / #583F60 | Все применяются к CTA и экспортируются |
+| Тёмный фон / текст | #242923 / #F5F3ED | Вторичный #C2C8BB |
+| Display | 32–72 px, line-height 1.04, tracking −.055em | Hero panorama до 84 px, mobile до 52 px |
+| Heading | 22–28 px, line-height 1.2 | Заголовки карточек |
+| Body | 16 px / 1.65 | Карточки 15 px; длина до 58ch |
+| Label | 11–12 px / 1.5 | Индексы и категории; не основной текст |
+| Отступы | 8, 16, 24, 32, 48, 64, 96 px | Внутренний ритм; секции 40–96 px |
+| Плотность | .8 / 1 / 1.2 | Множитель вертикальных полей секций |
+| Радиусы | 0 / 8 / 20 px | Общий параметр фото и CTA |
+| Контейнер | max 1280 px | Поля 20–64 px |
+| Колонки | gap 32–72 px | Текст и фото всегда в независимых колонках |
 
-## Design tokens
-| Token | Default | Purpose |
-| --- | --- | --- |
-| `--accent` | `#6159e8` | Primary action and highlight |
-| `--radius` | `14px` | Component rounding |
-| `--density` | `1` | Control spacing multiplier |
-| `--base` | `15px` | Base font size |
-| `--bg` | `#f6f7fa` | Page background |
-| `--surface` | `#fff` | Cards and panels |
-| `--text` | `#161b29` | Primary text |
-| `--muted` | `#697386` | Secondary text |
-| `--border` | `#e5e8f0` | Dividers and strokes |
+Источник адаптивных правил — `preview.css`; экспорт токенов — кнопка в конструкторе. Настройки применяются одновременно к выбранной секции и сборке. Редакционный режим меняет гарнитуру на Georgia; стандартный — системный Arial без внешних загрузок.
 
-## Using the playground
-1. Choose a category tab.
-2. Adjust theme, accent, radius, density or typography in the control panel.
-3. Test button states, form controls and modal interaction.
-4. Copy CSS tokens to reuse in a new project.
+## Адаптивная система
 
-Settings persist in the browser via localStorage when available.
+- 1024 px и выше: 3/4 колонки карточек; Hero 44/56, gap до 72 px.
+- 640–1023 px: 2 колонки карточек/метрик; Hero сохраняет 2 колонки с gap 32 px.
+- До 640 px: одна колонка; фото после текста; все проекты остаются видимыми; поля 20 px и gap от 32 px.
+- Панорама использует отдельный затемняющий слой и светлый текст; фотоподпись в этом варианте не выводится.
+- 760 px — переключение оболочки лаборатории: настройки становятся сеткой над превью.
+- Фиксированная ширина превью означает настоящую ширину iframe. Если она больше доступной области, прокручивается только рамка превью. Страница не расширяется.
+- Высота iframe следует фактической высоте содержимого, включая раскрытый FAQ и загруженные фото.
 
-## Current limitations
-- A visual prototype, not a production-ready package.
-- The form, pricing and navigation demos are non-transactional.
-- Visual QA across real browsers/devices and accessibility audit are still needed.
-- Tokens are currently embedded in a standalone HTML file for zero-build GitHub Pages deployment.
+## Библиотека
 
-## Roadmap
-- Extract tokens into portable JSON and CSS files.
-- Add semantic color contrast diagnostics.
-- Add interactive state matrix and responsive previews.
-- Add production-oriented components and layout patterns.
-- Add framework adapters (Tilda, vanilla HTML/CSS, React).
-- Create a versioned review process for the team.
+21 вариант в 10 типах секций: Hero (3), преимущества (2), услуги (2), этапы (2), портфолио (2), цифры (2), отзывы (2), FAQ (2), манифест (2), CTA (2).
 
-## Primary implementation target: Flexbe
+Hero A: две колонки и крупный дом справа. Hero B: полноформатная фотография с независимым текстовым слоем. Hero C: журнальный заголовок и описание над широким фото. Это разные сетки, а не только перестановка картинок.
 
-The first production application of this system is the engineering services website. Flexbe is the **primary** site-building platform; other platforms are secondary and should not drive component architecture.
+## Поведение и экспорт
 
-### Flexbe implementation decision tree
-1. **Native configurable block first.** Choose a block whose hierarchy and behavior match the pattern. Map typography, colors, spacing, borders, responsive behavior and states to system tokens.
-2. **Flexbe layout composition second.** Use free positioning and nested elements for designs that native blocks cannot reproduce faithfully, while checking mobile breakpoints.
-3. **Custom code last.** Use HTML/CSS/JS only where supported and necessary; avoid overriding Flexbe's internal generated selectors when stable custom classes or supported settings exist.
+Можно выбрать вариант, добавить его в сборку, поднять/опустить/удалить секцию. До 30 секций. Настройки и состав сохраняются в `wdl-v4`; недопустимые сохранённые значения отбрасываются. При недоступном localStorage работа продолжается без сохранения. Сброс настроек не удаляет сборку.
 
-### Required implementation spec for every pattern
-- Purpose and conversion role on the engineering website.
-- Flexbe block/template selection or a clear custom-layout rationale.
-- Content hierarchy, desktop/mobile layout and responsive breakpoints.
-- Exact design tokens: font roles, spacing, radius, colors and interactive states.
-- Asset dimensions and image-cropping guidance.
-- Flexbe editor configuration steps and any supported custom CSS/JS.
-- QA checklist at 320, 375, 390, 430, 768, 1024 and 1440 px.
+HTML-экспорт содержит стили, текущие настройки, выбранные секции, интерактивный FAQ и демо-CTA. Изображения подключаются абсолютными адресами лаборатории. Для автономного размещения скопируйте `assets/` и замените `<base>` на адрес своего каталога. CSS-экспорт содержит текущие токены; правила сеток берутся из `preview.css`.
 
-### Quality gates
-- No horizontal overflow on mobile.
-- Readable text, sufficient contrast, keyboard-focus visibility.
-- No unexpected sticky overlays or clipped form controls.
-- Validate in Flexbe preview before publishing; changes should remain drafts until approved.
+Предыдущая лаборатория полностью доступна в `components.html`: тема, радиусы, плотность, размер шрифта, свотчи, копирование CSS, формы, модальное окно, фильтры и демонстрационные тарифы. Исправлена ошибка выбора нескольких карточек направлений. Параметры старой и новой лаборатории хранятся раздельно.
 
-### First real-world use case
-Engineering services website: premium but practical visual language, clear service proposition, trust signals, project photos, readable pricing explanations and conversion-focused questionnaire. Build and validate reusable sections on Flexbe, then feed learnings back into the design system.
+## Ограничения
+
+Изображения, объекты, размеры, отзывы, числа — демонстрационные. CTA показывает сообщение, данные никуда не отправляются. В Flexbe нужно подключить настоящую форму, политику обработки данных и реальные сведения. Публикация лаборатории не является публикацией изменений AST-IM.
+
+Проверки и воспроизведение: [QA.md](QA.md). Перенос: [FLEXBE.md](FLEXBE.md).

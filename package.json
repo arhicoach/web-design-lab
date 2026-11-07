@@ -1,0 +1,11 @@
+{
+  "name": "architectural-precision-lab",
+  "version": "4.0.0",
+  "private": true,
+  "scripts": {
+    "test": "node qa.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}
