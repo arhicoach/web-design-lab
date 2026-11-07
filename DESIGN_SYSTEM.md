@@ -46,3 +46,30 @@ Settings persist in the browser via localStorage when available.
 - Add production-oriented components and layout patterns.
 - Add framework adapters (Tilda, vanilla HTML/CSS, React).
 - Create a versioned review process for the team.
+
+## Primary implementation target: Flexbe
+
+The first production application of this system is the engineering services website. Flexbe is the **primary** site-building platform; other platforms are secondary and should not drive component architecture.
+
+### Flexbe implementation decision tree
+1. **Native configurable block first.** Choose a block whose hierarchy and behavior match the pattern. Map typography, colors, spacing, borders, responsive behavior and states to system tokens.
+2. **Flexbe layout composition second.** Use free positioning and nested elements for designs that native blocks cannot reproduce faithfully, while checking mobile breakpoints.
+3. **Custom code last.** Use HTML/CSS/JS only where supported and necessary; avoid overriding Flexbe's internal generated selectors when stable custom classes or supported settings exist.
+
+### Required implementation spec for every pattern
+- Purpose and conversion role on the engineering website.
+- Flexbe block/template selection or a clear custom-layout rationale.
+- Content hierarchy, desktop/mobile layout and responsive breakpoints.
+- Exact design tokens: font roles, spacing, radius, colors and interactive states.
+- Asset dimensions and image-cropping guidance.
+- Flexbe editor configuration steps and any supported custom CSS/JS.
+- QA checklist at 320, 375, 390, 430, 768, 1024 and 1440 px.
+
+### Quality gates
+- No horizontal overflow on mobile.
+- Readable text, sufficient contrast, keyboard-focus visibility.
+- No unexpected sticky overlays or clipped form controls.
+- Validate in Flexbe preview before publishing; changes should remain drafts until approved.
+
+### First real-world use case
+Engineering services website: premium but practical visual language, clear service proposition, trust signals, project photos, readable pricing explanations and conversion-focused questionnaire. Build and validate reusable sections on Flexbe, then feed learnings back into the design system.
