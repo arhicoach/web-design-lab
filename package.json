@@ -3,7 +3,8 @@
   "version": "4.0.0",
   "private": true,
   "scripts": {
-    "test": "node qa.cjs"
+    "test": "node qa.cjs",
+    "test:concepts": "node concepts-qa.cjs"
   },
   "devDependencies": {
     "playwright": "1.62.1"
